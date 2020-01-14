@@ -25,6 +25,9 @@ module Baukis2
       g.view_specs false
     end
 
+    config.hosts << 'baukis2.example.com'
+    config.hosts << 'example.com'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
