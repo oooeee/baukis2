@@ -9,7 +9,7 @@ class Staff::SessionsController < Staff::Base
   end
 
   def create
-    @form = Staff::LoginForm.new(params[:staff_login_form])
+    @form = Staff::LoginForm.new(login_form_params)
     if @form.email.present?
       staff_member = StaffMember.find_by("LOWER(email) = ?", @form.email.downcase)
     end
@@ -30,5 +30,11 @@ class Staff::SessionsController < Staff::Base
   def destroy
     session.delete(:staff_member_id)
     redirect_to :staff_root, notice: "ログアウトしました。"
+  end
+
+  private
+
+  def login_form_params
+    params.require(:staff_login_form).permit(:email, :password)
   end
 end
